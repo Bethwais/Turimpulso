@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Pago Cancelado - Turimpulso</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+        body { 
+            font-family: 'Montserrat', Arial, sans-serif; 
+            background: #fdecea; 
+            color: #b00020;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        a.flecha {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #b00020;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a.flecha:hover {
+            color: #7a0000;
+        }
+
+        img {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        p {
+            font-size: 1.25rem;
+            max-width: 400px;
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.4;
+        }
+
+        @keyframes pulse {
+            0%, 100% { color: #b00020; }
+            50% { color: #e53935; }
+        }
+
+        a.retry-btn {
+            background-color: #b00020;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(176, 0, 32, 0.4);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        a.retry-btn:hover {
+            background-color: #7a0000;
+            box-shadow: 0 6px 20px rgba(122, 0, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('reservas.reservas') }}" class="flecha">&#8592; Volver a reservas</a>
+
+    <!-- Imagen del pago rechazado -->
+  <img src="{{ url_for('static', filename='imagenes/rechazado.webp') }}" alt="Pago rechazado" />
+
+
+    <h1>Pago cancelado</h1>
+    <p>No se completó el pago. Puedes intentar reservar de nuevo cuando quieras.</p>
+    <a href="{{ url_for('reservas.reservas') }}" class="retry-btn">Intentar otra vez</a>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pago con Stripe - Turimpulso</title>
+  <script src="https://js.stripe.com/v3/"></script>
+  <style>
+    /* Estilos básicos */
+    #card-element { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    #payment-message { color: green; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Pagar Reserva</h1>
+  
+  <form id="payment-form">
+    <label for="amount">Monto (USD):</label>
+    <input type="number" id="amount" value="20" min="1" required />
+    
+    <div id="card-element"><!-- Stripe Element va aquí --></div>
+    
+    <button id="submit">Pagar</button>
+    <div id="payment-message"></div>
+  </form>
+
+  <script>
+    const stripe = Stripe("TU_PUBLIC_KEY_STRIPE");  // pon aquí tu public key de Stripe
+
+    const paymentForm = document.getElementById("payment-form");
+    const amountInput = document.getElementById("amount");
+    const paymentMessage = document.getElementById("payment-message");
+
+    const elements = stripe.elements();
+    const cardElement = elements.create("card");
+    cardElement.mount("#card-element");
+
+    paymentForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const amount = parseInt(amountInput.value * 100); // centavos
+
+      // Llamamos a nuestro backend para crear el PaymentIntent
+      const response = await fetch("/pagos/crear-pago", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        const { clientSecret } = data;
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+          payment_method: { card: cardElement }
+        });
+
+        if (error) {
+          paymentMessage.textContent = error.message;
+          paymentMessage.style.color = "red";
+        } else if (paymentIntent.status === "succeeded") {
+          paymentMessage.textContent = "Pago realizado con éxito. ¡Gracias!";
+          paymentMessage.style.color = "green";
+        }
+      } else {
+        paymentMessage.textContent = data.error;
+        paymentMessage.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

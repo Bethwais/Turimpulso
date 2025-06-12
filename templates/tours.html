@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tours disponibles - Turimpulso</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e8f5e9;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: linear-gradient(to right, #2e7d32, #00796b);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      margin-bottom: 10px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .volver {
+      margin: 20px;
+    }
+
+    .volver a {
+      text-decoration: none;
+      color: #8e244d;
+      font-weight: bold;
+      font-size: 1.1em;
+      display: inline-block;
+    }
+
+    .lista-tours {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      padding: 30px 20px;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .tarjeta-tour {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      padding: 18px;
+      width: 280px;
+      text-align: center;
+      cursor: pointer;
+      color: inherit;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tarjeta-tour:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+
+    .tarjeta-tour img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 8px;
+    }
+
+    .ver-mapa-link {
+      font-weight: bold;
+      color: #00796b;
+      text-decoration: none;
+      margin-bottom: 12px;
+      padding: 6px 12px;
+      border: 2px solid #00796b;
+      border-radius: 6px;
+      transition: background-color 0.3s, color 0.3s;
+      display: inline-block;
+    }
+    .ver-mapa-link:hover {
+      background-color: #00796b;
+      color: white;
+    }
+
+    .tarjeta-tour h3 {
+      margin: 8px 0 10px 0;
+      color: #8e244d;
+      font-size: 1.2em;
+    }
+
+    .descripcion {
+      font-size: 0.95em;
+      margin-bottom: 10px;
+      color: #555;
+    }
+
+    .precio {
+      font-weight: bold;
+      color: #2e7d32;
+      font-size: 1.1em;
+      margin-bottom: 12px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2em;
+      }
+
+      .tarjeta-tour {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="volver">
+    <a href="{{ url_for('inicio') }}"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+  </div>
+
+  <header>
+    <h1><i class="fas fa-suitcase-rolling"></i> Tours disponibles</h1>
+    <p style="font-style: italic;">
+      ¡Activa tu viaje, impulsa tu aventura con Turimpulso!
+    </p>
+  </header>
+
+  <div class="lista-tours">
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=cultural-cdmx">
+        <img src="{{ url_for('static', filename='imagenes/cdmx.jpg') }}" alt="Tour Cultural en Ciudad de México" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Ciudad+de+M%C3%A9xico,+CDMX,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Tour Cultural en Ciudad de México</h3>
+      <p class="descripcion">Explora museos, zonas arqueológicas y arquitectura colonial.</p>
+      <p class="precio">MXN 1200</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=aventura-chiapas">
+        <img src="{{ url_for('static', filename='imagenes/chiapas.webp') }}" alt="Aventura Natural en Chiapas" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Tuxtla+Guti%C3%A9rrez,+Chiapas,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Aventura Natural en Chiapas</h3>
+      <p class="descripcion">Disfruta cascadas, reservas naturales y cultura local.</p>
+      <p class="precio">MXN 2200</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=gastronomia-oaxaca">
+        <img src="{{ url_for('static', filename='imagenes/comida.png') }}" alt="Ruta Gastronómica en Oaxaca" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Oaxaca+de+Ju%C3%A1rez,+Oaxaca,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Ruta Gastronómica en Oaxaca</h3>
+      <p class="descripcion">Degusta la cocina tradicional y contemporánea oaxaqueña.</p>
+      <p class="precio">MXN 1500</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=selva-lacandona">
+        <img src="{{ url_for('static', filename='imagenes/selva.webp') }}" alt="Exploración en la Selva Lacandona" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Selva+Lacandona,+Chiapas,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Exploración en la Selva Lacandona</h3>
+      <p class="descripcion">Aventura en la selva con guías locales y naturaleza pura.</p>
+      <p class="precio">MXN 2300</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=historico-guanajuato">
+        <img src="{{ url_for('static', filename='imagenes/Circuito.jpg') }}" alt="Circuito Histórico en Guanajuato" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Guanajuato,+Guanajuato,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Circuito Histórico en Guanajuato</h3>
+      <p class="descripcion">Recorre calles coloniales y conoce la historia minera.</p>
+      <p class="precio">MXN 1300</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=arqueologico-teotihuacan">
+        <img src="{{ url_for('static', filename='imagenes/arqueologico.webp') }}" alt="Tour Arqueológico en Teotihuacán" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Teotihuacan,+Estado+de+Mexico,+Mexico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Tour Arqueológico en Teotihuacán</h3>
+      <p class="descripcion">Explora las pirámides y conoce la cultura prehispánica.</p>
+      <p class="precio">MXN 1400</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=colonial-san-miguel">
+        <img src="{{ url_for('static', filename='imagenes/Escapada.jpg') }}" alt="Escapada Colonial en San Miguel de Allende" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/San+Miguel+de+Allende,+Guanajuato,+Mexico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Escapada Colonial en San Miguel de Allende</h3>
+      <p class="descripcion">Disfruta arte, arquitectura y cultura en este pueblo mágico.</p>
+      <p class="precio">MXN 1600</p>
+    </div>
+
+    <div class="tarjeta-tour">
+      <a href="{{ url_for('reservas.reservas') }}?tour=cenotes-yucatan">
+        <img src="{{ url_for('static', filename='imagenes/Yucatan.jpg') }}" alt="Aventura en Cenotes de Yucatán" />
+      </a>
+      <a href="https://www.google.com/maps/dir/Monterrey,+Nuevo+Le%C3%B3n,+M%C3%A9xico/Cenotes,+Yucat%C3%A1n,+M%C3%A9xico" target="_blank" rel="noopener noreferrer" class="ver-mapa-link">Ver mapa</a>
+      <h3>Aventura en Cenotes de Yucatán</h3>
+      <p class="descripcion">Explora y nada en los cenotes más impresionantes de Yucatán.</p>
+      <p class="precio">MXN 1800</p>
+    </div>
+  </div>
+</body>
+</html>

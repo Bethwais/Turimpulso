@@ -1,0 +1,75 @@
+/* Fondo azul suave para toda la página */
+body {
+    background-color: #cce7ff; /* azul claro suave */
+    color: #333333; /* color gris oscuro para texto general */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sección inicio */
+#inicio {
+    padding: 50px 20px;
+    text-align: center;
+    background-color: transparent; /* transparente para que se vea el fondo body */
+    color: #003366; /* azul oscuro para letras de esta sección */
+}
+
+/* Encabezados en inicio */
+#inicio h1 {
+    font-size: 2.8em;
+    color: #003366; /* azul oscuro */
+    margin-bottom: 10px;
+}
+
+/* Texto lema */
+#inicio .lema {
+    font-size: 1.5em;
+    font-style: italic;
+    color: #00509e; /* azul intermedio */
+}
+
+/* Texto frase destacada */
+#inicio .frase-destacada {
+    font-size: 1em;
+    color: #b00020; /* rojo */
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Botones */
+.boton-ver-tours, .boton-reservar {
+    display: inline-block;
+    padding: 14px 30px;
+    margin: 10px;
+    font-size: 1.1em;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+    border: none;
+}
+
+/* Botón Ver tours */
+.boton-ver-tours {
+    background-color: #3c7d76; /* verde azulado */
+    color: white;
+}
+
+.boton-ver-tours:hover {
+    background-color: #2e615b;
+    transform: scale(1.05);
+}
+
+/* Botón Reservar */
+.boton-reservar {
+    background-color: #b00020; /* rojo fuerte */
+    color: white;
+}
+
+.boton-reservar:hover {
+    background-color: #800015;
+    transform: scale(1.05);
+}

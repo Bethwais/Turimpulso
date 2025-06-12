@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Reservar tour - Turimpulso</title>
+    <style>
+        body {
+
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #c8dcc8; /* Verde muy suave pero un poco más oscuro */
+        margin: 0; padding: 0;
+        min-height: 100vh;
+        display: flex; flex-direction: column; align-items: center;
+        }
+
+        header {
+        width: 100%;
+        background: linear-gradient(to right, #1b4d20, #004d45); /* Verde fuerte oscuro a verde azulado oscuro */
+        color: rgba(255, 255, 255, 0.95);
+        padding: 40px 20px 60px;
+        text-align: center;
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Sombra negra más fuerte */
+        position: relative;
+        }
+
+        header h1 {
+        font-size: 3.2em;
+        margin: 0;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 6px rgba(0,0,0,0.6); /* Sombra negra más marcada */
+        }
+
+        header p {
+        font-size: 1.4em;
+        font-style: italic;
+        margin-top: 10px;
+        font-weight: 600;
+        text-shadow: 0 0 4px rgba(0,0,0,0.5);
+        }
+
+        /* Icono FontAwesome blanco en header (más sólido) */
+        header .icono-reserva {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 2.4em;
+        color: rgba(255, 255, 255, 1);
+        text-shadow: 0 0 6px rgba(0,0,0,0.6);
+        user-select: none;
+        }
+
+        /* Link volver con rojo vino oscuro */
+        a.flecha {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        font-weight: 700;
+        color: #6b1a38; /* Rojo vino oscuro y profundo */
+        text-decoration: none;
+        font-size: 1.6em;
+        background: #d1a0a1cc; /* Fondo rojo vino opaco */
+        padding: 6px 12px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(107, 26, 56, 0.3);
+        transition: color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        user-select: none;
+        z-index: 1000;
+        }
+
+        a.flecha:hover {
+        color: #4a1228;
+        background-color: #a9444dcc;
+        box-shadow: 0 4px 14px #670b28cc;
+        text-shadow: none;
+    }
+
+    main {
+        background: #f0f4f0; /* Blanco muy suave, algo más oscuro que el anterior */
+        border-radius: 20px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Sombra más marcada */
+        padding: 35px 30px 45px;
+        max-width: 620px;
+        width: 90%;
+        margin: -60px 0 60px;
+        color: #333333; /* Gris oscuro profundo */
+        position: relative;
+        z-index: 10;
+    }
+
+    h2 {
+        text-align: center;
+        color: #6b1a38; /* Rojo vino oscuro */
+        font-weight: 800;
+        font-size: 2.8em;
+        margin-bottom: 25px;
+        letter-spacing: 0.04em;
+    }
+
+    /* Precio tour con verde fuerte oscuro */
+    .precio-tour {
+        color: #1b4d20; /* Verde oscuro */
+        font-weight: 700;
+        font-size: 1.4em;
+        margin-top: 8px;
+    }
+
+    /* Descripción tour */
+    .descripcion-tour {
+        color: #444444; /* Gris oscuro */
+        font-size: 1em;
+        margin-top: 10px;
+    }
+
+    /* Labels */
+    label {
+        margin-top: 18px;
+        font-weight: 700;
+        color: #6b1a38; /* rojo vino oscuro */
+        font-size: 1.1em;
+        user-select: none;
+        display: block;
+    }
+
+    /* Inputs y selects */
+    input, select {
+        margin-top: 8px;
+        padding: 12px 15px;
+        border-radius: 12px;
+        border: 2px solid #777;
+        font-size: 1.15em;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        font-family: inherit;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: #fafafa;
+        color: #222;
+    }
+
+    input:focus, select:focus {
+        border-color: #1b4d20; /* verde oscuro */
+        box-shadow: 0 0 10px #2e7d32cc;
+        outline: none;
+    }
+
+    /* Botón */
+    button {
+        margin-top: 40px;
+        padding: 14px 0;
+        background-color: #1b4d20; /* verde oscuro */
+        color: white;
+        border: 2.5px solid #004d45; /* verde azulado oscuro */
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        box-shadow: 0 6px 18px rgba(0, 77, 69, 0.6);
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        user-select: none;
+        width: 100%;
+    }
+
+    button:hover {
+        background-color: #004d45; /* verde azulado más oscuro */
+        border-color: #1b4d20; /* verde oscuro */
+        box-shadow: 0 8px 24px rgba(27, 77, 32, 0.8);
+    }
+
+    /* Footer */
+    footer {
+        width: 100%;
+        background-color: #1b4d2077; /* verde oscuro translúcido */
+        color: #c9d7c9;
+        text-align: center;
+        padding: 20px 10px;
+        font-size: 0.9em;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        box-shadow: inset 0 2px 8px #00330099;
+        user-select: none;
+    }
+
+
+/* Otros estilos quedan igual o puedes ajustarlos según necesidad */
+
+        #mapa-asientos {
+            display: grid;
+            grid-template-columns: repeat(4, 55px);
+            gap: 10px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+        #mapa-asientos button {
+         width: 55px;
+         height: 55px;
+          padding: 0;
+         margin: 5px;
+         border-radius: 12px;
+        border: 2px solid #5a7d4a; /* verde oliva */
+         background: linear-gradient(145deg, #e3f0d9, #b7c899); /* verde claro con sombra */
+         box-shadow: 3px 3px 5px #a1af81, -3px -3px 5px #ffffff;
+         cursor: pointer;
+         font-weight: 700;
+         color: #3b3b3b;
+         user-select: none;
+         transition: all 0.3s ease;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+        }
+
+    #mapa-asientos button:hover {
+    background: linear-gradient(145deg, #a05357, #7f3a41); /* vino oscuro con profundidad */
+    border-color: #7f3a41;
+    color: #fff;
+    box-shadow: 0 0 10px #b2474c;
+    }
+
+    #mapa-asientos button.seleccionado {
+    background: linear-gradient(145deg, #4169a7, #2c3e71); /* azul fuerte */
+    border-color: #1f2a4a;
+    color: #fff;
+    box-shadow: 0 0 10px #3d5abf;
+        }
+
+    #mapa-asientos button.ocupado {
+    background: linear-gradient(145deg, #888888, #5a5a5a); /* gris oscuro */
+    border-color: #444444;
+    color: #ddd;
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+    }   
+
+        
+        .turnos {
+            display: flex;
+            gap: 40px;
+            margin-top: 8px;
+        }
+        .turnos label {
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #800020;
+            user-select: none;
+        }
+        @media (max-width: 650px) {
+            header h1 {
+                font-size: 2.3em;
+            }
+            main {
+                margin: -40px 15px 40px;
+                padding: 30px 20px 40px;
+            }
+            button {
+                font-size: 1.1em;
+            }
+            #mapa-asientos {
+                grid-template-columns: repeat(3, 55px);
+            }
+            .turnos {
+                gap: 20px;
+            }
+        }
+
+       .turnos-estilizados {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
+
+.turnos-estilizados input[type="radio"] {
+    display: none;
+}
+
+.turnos-estilizados label {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background-color: #f8f9fa; /* color base neutro */
+}
+
+/* Día - azul pastel */
+.turno-dia {
+    border-color: #b8e3ea;
+    color: #107a8b;
+    background-color: #e6f7fa;
+}
+.turno-dia:hover {
+    background-color: #cdeef4;
+}
+input[type="radio"]#turno-dia:checked + .turno-dia {
+    background-color: #b8e3ea;
+    color: #084f5c;
+}
+
+/* Tarde - naranja pastel */
+.turno-tarde {
+    border-color: #ffd6a4;
+    color: #d06a00;
+    background-color: #fff0db;
+}
+.turno-tarde:hover {
+    background-color: #ffe3c2;
+}
+input[type="radio"]#turno-tarde:checked + .turno-tarde {
+    background-color: #ffd6a4;
+    color: #a85400;
+}
+
+/* Noche - morado pastel */
+.turno-noche {
+    border-color: #d6c1f0;
+    color: #5a379e;
+    background-color: #f3eaff;
+}
+.turno-noche:hover {
+    background-color: #e3d6fb;
+}
+input[type="radio"]#turno-noche:checked + .turno-noche {
+    background-color: #d6c1f0;
+    color: #3e2675;
+}
+
+        
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        
+        <h1>Reservar tour en Turimpulso</h1>
+        <p>¡Activa tu viaje, impulsa tu aventura!</p>
+          <i class="fa-solid fa-ticket icono-reserva" title="Reservas"></i>
+    </header>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  rel="stylesheet"
+/>
+
+    <a href="{{ url_for('inicio') }}" class="flecha" aria-label="Volver a inicio">&#8592; Volver</a>
+
+    <main>
+        <h2>Reserva tu lugar</h2>
+
+        {% if mensaje %}
+            <p class="mensaje-error">{{ mensaje }}</p>
+        {% endif %}
+
+        {% if exito %}
+            <p class="mensaje-exito">{{ exito }}</p>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('reservas.reservas') }}" novalidate>
+            
+
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required autocomplete="off" value="{{ request.form.nombre or '' }}" />
+
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required autocomplete="off" value="{{ request.form.email or '' }}" />
+<label for="fecha">Selecciona la fecha del tour:</label>
+<input type="date" id="fecha" name="fecha" required value="{{ request.form.fecha or '' }}" />
+
+
+<label for="tour">Elige tu tour</label>
+<select id="tour" name="tour" required>
+  <option value="" disabled {% if not request.form.get('tour') %}selected{% endif %}>-- Selecciona un tour --</option>
+  <option value="cultural-cdmx" {% if request.form.get('tour') == 'cultural-cdmx' %}selected{% endif %}>
+    Tour Cultural en Ciudad de México — MXN $1,200
+  </option>
+  <option value="aventura-chiapas" {% if request.form.get('tour') == 'aventura-chiapas' %}selected{% endif %}>
+    Aventura Natural en Chiapas — MXN $2,200
+  </option>
+  <option value="gastronomia-oaxaca" {% if request.form.get('tour') == 'gastronomia-oaxaca' %}selected{% endif %}>
+    Ruta Gastronómica en Oaxaca — MXN $1,500
+  </option>
+  <option value="selva-lacandona" {% if request.form.get('tour') == 'selva-lacandona' %}selected{% endif %}>
+    Exploración en la Selva Lacandona — MXN $2,300
+  </option>
+  <option value="historico-guanajuato" {% if request.form.get('tour') == 'historico-guanajuato' %}selected{% endif %}>
+    Circuito Histórico en Guanajuato — MXN $1,300
+  </option>
+  <option value="arqueologico-teotihuacan" {% if request.form.get('tour') == 'arqueologico-teotihuacan' %}selected{% endif %}>
+    Tour Arqueológico en Teotihuacán — MXN $1,400
+  </option>
+  <option value="colonial-san-miguel" {% if request.form.get('tour') == 'colonial-san-miguel' %}selected{% endif %}>
+    Escapada Colonial en San Miguel de Allende — MXN $1,600
+  </option>
+  <option value="cenotes-yucatan" {% if request.form.get('tour') == 'cenotes-yucatan' %}selected{% endif %}>
+    Aventura en Cenotes de Yucatán — MXN $1,800
+  </option>
+</select>
+
+           <label for="turno">Elige turno:</label>
+<div class="turnos-estilizados">
+    <input type="radio" id="turno-dia" name="turno" value="día" required onchange="mostrarHorarios(this.value)" {% if request.form.turno == 'día' %}checked{% endif %}>
+    <label for="turno-dia" class="turno-dia">Día</label>
+
+    <input type="radio" id="turno-tarde" name="turno" value="tarde" required onchange="mostrarHorarios(this.value)" {% if request.form.turno == 'tarde' %}checked{% endif %}>
+    <label for="turno-tarde" class="turno-tarde">Tarde</label>
+
+    <input type="radio" id="turno-noche" name="turno" value="noche" required onchange="mostrarHorarios(this.value)" {% if request.form.turno == 'noche' %}checked{% endif %}>
+    <label for="turno-noche" class="turno-noche">Noche</label>
+</div>
+
+
+            <label for="horario">Selecciona horario:</label>
+             <select id="horario" name="horario" required {% if not request.form.get('turno') %}disabled{% endif %}>
+                <option value="" disabled {% if not request.form.get('horario') %}selected{% endif %}>-- Selecciona un turno primero --</option>
+            </select>
+
+            </select>
+
+            <label>Selecciona tus asientos:</label>
+            <div id="mapa-asientos" aria-label="Mapa de asientos para selección"></div>
+            <input type="hidden" id="asientosSeleccionados" name="asientosSeleccionados" required value="{{ request.form.asientosSeleccionados or '' }}">
+
+            <button type="submit">Reservar ahora</button>
+        </form>
+    </main>
+
+    <footer>
+        Turimpulso © 2025 | Todos los derechos reservados
+    </footer>
+
+    <script>
+                 const horariosPorTurno = {
+                 día: ['08:00', '09:00', '10:00', '11:00'],
+                  tarde: ['13:00', '14:30', '16:00', '17:30'],
+                 noche: ['19:00', '20:30', '22:00', '23:30']
+};
+
+        const horarioSelect = document.getElementById('horario');
+        const mapaAsientos = document.getElementById('mapa-asientos');
+        const inputAsientos = document.getElementById('asientosSeleccionados');
+
+        // Mostrar horarios según turno seleccionado y mantener seleccionado si viene del form
+        function mostrarHorarios(turno) {
+            horarioSelect.disabled = false;
+            horarioSelect.innerHTML = '<option value="" disabled selected>-- Selecciona un horario --</option>';
+            horariosPorTurno[turno].forEach(hora => {
+                const option = document.createElement('option');
+                option.value = hora;
+                option.textContent = hora;
+                horarioSelect.appendChild(option);
+            });
+
+            // Restaurar horario seleccionado si ya hay valor
+            const horarioGuardado = "{{ request.form.get('horario') or '' }}";
+            if (horarioGuardado) {
+                horarioSelect.value = horarioGuardado;
+            }
+        }
+
+        // Crear el mapa de asientos y restaurar selección si viene del servidor
+        const filas = 4;
+        const columnas = 4;
+        let seleccionados = [];
+
+        function crearAsientos() {
+            mapaAsientos.innerHTML = '';  // Limpiar para evitar duplicados
+            seleccionados = [];
+
+            // Leer asientos seleccionados del input oculto, separar en array
+            const asientosGuardados = inputAsientos.value ? inputAsientos.value.split(',').map(x => parseInt(x)) : [];
+
+            for(let i = 1; i <= filas * columnas; i++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = i;
+                btn.title = `Asiento número ${i}`;
+                btn.setAttribute('aria-pressed', 'false');
+
+                if (asientosGuardados.includes(i)) {
+                    btn.classList.add('seleccionado');
+                    btn.setAttribute('aria-pressed', 'true');
+                    seleccionados.push(i);
+                }
+
+                btn.addEventListener('click', () => {
+                    if (seleccionados.includes(i)) {
+                        seleccionados = seleccionados.filter(n => n !== i);
+                        btn.classList.remove('seleccionado');
+                        btn.setAttribute('aria-pressed', 'false');
+                    } else {
+                        seleccionados.push(i);
+                        btn.classList.add('seleccionado');
+                        btn.setAttribute('aria-pressed', 'true');
+                    }
+                    inputAsientos.value = seleccionados.join(',');
+                });
+
+                mapaAsientos.appendChild(btn);
+            }
+            inputAsientos.value = seleccionados.join(',');
+        }
+
+        crearAsientos();
+
+        // Si ya viene turno en el form, mostrar horarios al cargar
+        const turnoGuardado = "{{ request.form.get('turno') or '' }}";
+        if (turnoGuardado) {
+            mostrarHorarios(turnoGuardado);
+        }
+        document.querySelector('form').addEventListener('submit', function(event) {
+  if (!inputAsientos.value) {
+    alert('Por favor selecciona al menos un asiento antes de reservar.');
+    event.preventDefault();
+  }
+});
+
+    </script>
+
+</body>
+</html>
+

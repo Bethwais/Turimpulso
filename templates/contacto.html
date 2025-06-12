@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contacto - Turimpulso</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 60px 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: linear-gradient(rgba(232, 245, 233, 0.8), rgba(232, 245, 233, 0.8)),
+                  url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #555555;
+    }
+
+    .container {
+      background: #72cecb92;
+      max-width: 650px;
+      width: 100%;
+      padding: 40px 45px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      color: #2E7D32;
+    }
+
+    .container:hover {
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00796B;
+      letter-spacing: 1.4px;
+      text-shadow: 0 0 6px rgba(142, 36, 77, 0.3);
+    }
+
+    p.intro {
+      font-weight: 400;
+      font-size: 1.15rem;
+      text-align: center;
+      margin-bottom: 30px;
+      color: #8E244D;
+      letter-spacing: 0.6px;
+    }
+
+    .flecha {
+      display: inline-block;
+      font-weight: 600;
+      color: #2E7D32;
+      text-decoration: none;
+      font-size: 1.4rem;
+      margin-bottom: 28px;
+      transition: color 0.3s ease;
+    }
+
+    .flecha:hover {
+      color: #00796B;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 25px;
+    }
+
+    ul li {
+      padding: 14px 18px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: rgba(0, 0, 0, 0.12);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      color: #555555;
+    }
+
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #555555;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 30px;
+      border: 1.5px solid #2E7D32;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #FFFFFF;
+      color: #555555;
+      resize: vertical;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    form input::placeholder,
+    form textarea::placeholder {
+      color: #8E244D;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      border-color: #00796B;
+      background: #e8f5e9;
+      box-shadow: 0 0 8px rgba(0, 121, 107, 0.5);
+      outline: none;
+    }
+
+    form button {
+      background-color: #2E7D32;
+      color: #FFFFFF;
+      border: none;
+      padding: 18px 0;
+      width: 100%;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 20px rgba(46, 125, 50, 0.5);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #00796B;
+      box-shadow: 0 10px 26px rgba(0, 121, 107, 0.7);
+    }
+
+    .info-contacto,
+    .redes-sociales {
+      margin-top: 42px;
+      color: #555555;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      font-size: 1rem;
+      border-top: 2px solid #2E7D32;
+      padding-top: 22px;
+    }
+
+    .info-contacto h3,
+    .redes-sociales h3 {
+      color: #8E244D;
+      font-weight: 600;
+      margin-bottom: 18px;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .info-contacto p,
+    .redes-sociales p {
+      margin: 8px 0;
+    }
+
+    .redes-sociales a {
+      color: #2E7D32;
+      font-weight: 700;
+      text-decoration: none;
+      margin-right: 22px;
+      font-size: 1.15rem;
+      transition: color 0.3s ease;
+    }
+
+    .redes-sociales a:hover {
+      color: #00796B;
+    }
+
+    iframe {
+      margin-top: 28px;
+      width: 100%;
+      height: 320px;
+      border: none;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(142, 36, 77, 0.35);
+    }
+
+    iframe:hover {
+      box-shadow: 0 14px 36px rgba(142, 36, 77, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 25px;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      form button {
+        font-size: 1.1rem;
+      }
+
+      iframe {
+        height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" role="main" aria-label="Formulario de contacto Turimpulso">
+
+    <a href="{{ url_for('inicio') }}" class="flecha" aria-label="Volver a la página de inicio">&#8592; Volver</a>
+
+    <h2>Contáctanos</h2>
+    <p class="intro">¿Tienes preguntas o necesitas ayuda con tu reserva? <br>¡Estamos encantados de ayudarte!</p>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul aria-live="polite" role="alert">
+          {% for category, message in messages %}
+            <li style="color: {% if category == 'success' %}#2E7D32{% else %}#8E244D{% endif %}; font-weight: 600;">
+              {{ message }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('contacto.enviar_mensaje') }}" method="post" novalidate>
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo" />
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required placeholder="ejemplo@correo.com" />
+
+      <label for="asunto">Asunto</label>
+      <input type="text" id="asunto" name="asunto" placeholder="Motivo del mensaje (opcional)" />
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="5" required placeholder="Escribe tu mensaje aquí..."></textarea>
+
+      <button type="submit" aria-label="Enviar mensaje de contacto">Enviar Mensaje</button>
+    </form>
+
+    <section class="info-contacto">
+      <h3>Información de contacto</h3>
+      <p>📍 Dirección: Av. Ejemplo 123, Ciudad Turística</p>
+      <p>📞 Teléfono: +54 9 11 1234-5678</p>
+      <p>✉️ Email: contacto@turimpulso.com</p>
+    </section>
+
+    <section class="redes-sociales">
+      <h3>Síguenos en redes</h3>
+      <p>
+        <a href="https://facebook.com/turimpulso" target="_blank">Facebook</a>
+        <a href="https://instagram.com/turimpulso" target="_blank">Instagram</a>
+        <a href="https://twitter.com/turimpulso" target="_blank">Twitter</a>
+      </p>
+    </section>
+
+     <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.872385077632!2d-58.44435098478711!3d-34.5997977804599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccad6d0f00001%3A0xf0e04f7906c814bb!2sAv.%20Ejemplo%20123!5e0!3m2!1ses!2sar!4v1686589192632!5m2!1ses!2sar" 
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      aria-label="Mapa con ubicación de la oficina de Turimpulso">
+    </iframe>
+
+  </div>
+
+</body>
+</html>
